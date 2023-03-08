@@ -1,0 +1,24 @@
+{% extends "finalproject/layout.html" %} {% load static %} {% block body %}
+
+<h3>Calculate the Time to Go to Bed</h3>
+
+<div class="table">
+
+  <div>
+    <form  method="POST" href="{% url 'bed_time' %}">
+      {% csrf_token %} {{form}}
+      <input id="sleepbtn" class="btn btn-primary button" type="submit" value="Calculate" />
+    </form>
+  </div>
+
+  <h3 style="margin-bottom:10px !important;">
+    Time to Sleep: {% for p in i %}
+    <h2 id="p">{{p}} {{ampm}}</h2>
+    {% endfor %}
+  </h3>
+
+</div>
+
+{% block script %}
+<script src="{% static 'finalproject/index.js' %}"></script>
+{% endblock %} {% endblock %}

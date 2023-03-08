@@ -1,0 +1,25 @@
+{% extends "finalproject/layout.html" %}
+{% load static %}
+{% block body %}
+
+
+<div class="table clock-wrapper">
+  <div class="cell">
+    <h2 id="clock" class="clock"></h2>
+
+      <select id="hours"></select>
+      <select id="minutes"></select>
+      <select id="ampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+
+      <button class="startstop" id="startstop">Set Alarm</button>
+  </div>
+</div>
+
+
+{% block script %}
+<script src="{% static 'finalproject/index.js' %}"></script>
+{% endblock %}
+{% endblock %}

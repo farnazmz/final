@@ -1,0 +1,25 @@
+{% extends "finalproject/layout.html" %}
+{% load static %}
+{% block body %}
+
+<li>Today: {{d}}</li>
+
+<h2>daily chart</h2>
+
+{% for s in todays %} 
+        <ul  class="dim">
+                <li><h4 id="{{s.categorytoday}}">{{s.counttoday}}</h4>total in grams</li>
+                <li><h5 id="counted">{{s.counttoday}}</h5></li>
+                <h5>count:  {{s.categorytoday}} </h5> 
+                <li><h6>user: {{s.s_user}} on {{s.todayis}}</h6></li>
+        </ul>
+{% endfor %}
+
+        <div class="chart">
+                <div id="myChart" style="height: 900px; width: 500px; margin-right:auto; margin-left:auto;"></div> 
+        </div>
+        
+{% block script %}
+<script src="{% static 'finalproject/index.js' %}"></script>
+{% endblock %}
+{% endblock %}

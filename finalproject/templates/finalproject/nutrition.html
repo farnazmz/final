@@ -1,0 +1,35 @@
+{% extends "finalproject/layout.html" %}
+{% load static %}
+{% block body %}
+
+{% if user.is_authenticated %}
+
+    <div class="table">
+        <form style="padding-top:35px;" method="POST" action="{% url 'nutrition' %}">
+            {% csrf_token %}
+            {{nform}}
+            <input id ="nutbtn" type="submit" value="Nutritions" class="btn btn-primary button">
+
+        </form>
+    </div>
+
+    <h2>Your all time data</h2>
+
+    {% for n in nutritions %} 
+        {% if request.user.id == n.n_user.id %}
+        <ul  class="dim">
+            <h5>{{n.category}} g:</h5> <h5 id="counted">{{n.counted}}</h5>
+            <li><h4 id="{{n.category}}">{{n.counted}}</h4></li>
+            <li><h6>user: {{n.n_user}} on {{n.n_date}}</h6></li>
+        </ul>
+        {% endif %}
+    {% endfor %}
+
+    <div id='chart_div' style="max-width:1000px; max-height:600px; margin-left: auto;
+    margin-right: auto;"></div>
+
+{% endif %}
+{% block script %}
+<script src="{% static 'finalproject/index.js' %}"></script>
+{% endblock %}
+{% endblock %}

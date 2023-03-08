@@ -1,0 +1,25 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+
+    <h2>Login</h2>
+
+    {% if body %}
+        <div>{{ body }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="reminder" name="reminder" placeholder="Reminder">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        
+        <button type="submit" ><a  href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a></button>
+    </form>
+
+
+{% endblock %}

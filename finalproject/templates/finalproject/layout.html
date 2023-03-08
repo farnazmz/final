@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="{% static 'finalproject/styles.css' %}">
+        <link rel="shorcut icon" href="#" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum Myeongjo">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js" type='text/javascript'></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>  
+        <script >
+            const toggleMenu = () => {
+                document.body.classList.toggle('open');
+            };
+        </script>
+        <audio id="myAudio">
+          <source src="\static\finalproject\sounds\Megatone - Black and White 01.mp3" type="audio/mpeg" controls preload="auto" autobuffer> Your browser
+        </audio> 
+    </head>
+
+    <body>
+    <div>
+        <botton class="burger closeb fa" onclick="toggleMenu()">&#xf0c9;</botton>
+        <div class="menu">
+            <nav>
+            {% if user.is_authenticated %} 
+                <a href="{% url 'index'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Home" class="fa fa-home "></i></a>
+                <a href="{% url 'bed_time'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Bed Time" class="fa fa-bed"></i></a>
+                <a href="{% url 'alarm'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Alarm" class="fa fa-bell"></i></a>
+                <a href="{% url 'nutrition'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Nutrition" class="fa fa-bar-chart"></i></a>
+                <a href="{% url 'sleepdaily'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Sleep" class="fa fa-calendar"></i></a>
+                <a href="{% url 'memo'%}" style="animation-delay: 0.2s"><i data-toggle="tooltip" href="#" title="Note" class="fa fa-edit"></i></a>
+                <a href="{% url 'logout'%}" style="animation-delay: 0.1s"><i data-toggle="tooltip" href="#" title="Sign out" class="fa fa-sign-out"></i></a>
+            {% else %}
+                <a href="{% url 'login'%}" style="animation-delay: 0.1s">Login</a>
+                <a href="{% url 'register'%}" style="animation-delay: 0.1s">Register</a>
+            {% endif %}
+            </nav>
+        </div>
+    </div>
+    <div class="analog-div">
+        <div>
+            <div class="analog-clock">
+                <div class="face">
+                    <div class="hand hourHand"></div>
+                    <div class="hand minuteHand"></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    {% block indexx %}
+    <div>
+        <div class="body ">
+        </div>
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "finalproject/layout.html" %}
+
+{% block body %}
+
+    <h2>Register</h2>
+
+    {% if body %}
+        <div>{{ body }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="reminder" name="reminder" placeholder="Reminder category path">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "finalproject/layout.html" %}
+{% load static %}
+{% block body %}
+
+{% if user.is_authenticated %}
+
+    <div class="notediv table">
+        <form style="padding-top:35px;" method="POST" action="{% url 'memo' %}">
+            {% csrf_token %}
+            {{form}}
+            <input id ="notebtn" type="submit" value="Save" class="btn btn-primary button">
+        </form>
+    </div>
+
+    {% for p in memos %}  
+        {% if request.user.id == p.this_user.id %}
+        <ul class="dim">
+            <li>{{p.note_date}}</li>
+            <li id="my_note{{p.id|safe}}">{{p.my_note|safe}}</li>
+            <div>
+                <button onclick="edit_button(this.value)" name="editbtn" type="submit" class="edit_button {{p.id|safe}}" id="editbtn{{p.id}}" value="{{p.id|safe}}">Add...</button> 
+                <p id="edited-my_note-new{{p.id|safe}}"></p>
+                    <div id="edit-view{{p.id|safe}}" style="display:none;">
+                        <form  method="POST" id="edit-form{{p.id|safe}}"  class ="edit-form">
+                            {% csrf_token %}
+                            <textarea type="text"  id="edited-my_note{{p.id|safe}}"></textarea>
+                            <input type="submit" id ="noteditbtn" class="btn btn-primary"/>
+                        </form>
+                    </div>
+                </div>        
+        </ul>
+        <br>
+        {% endif %}
+    {% endfor %}
+        
+{% endif %}
+
+{% block script %}
+    <script src="{% static 'finalproject/index.js' %}"></script>
+{% endblock %}
+{% endblock %}
